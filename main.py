@@ -15,7 +15,6 @@ while True: # asks how many players playing the game.
             break
         else:
             print("Must be between 2 to 4 players.")
-
     else:
         print("Invalid, try again")
 
@@ -26,7 +25,9 @@ while max(player_scores) < max_score:
 
     for player_idx in range(players):
         print(f"\nPlayer number {player_idx + 1} has just started!\n")
+        print(f"Your total score is {player_scores[player_idx]} \n")
         current_score = 0
+
         while True:
             should_roll = input("Would you like to roll (y)?")
             if should_roll.lower() != "y": #converts to lowercase
@@ -35,11 +36,17 @@ while max(player_scores) < max_score:
             value = roll()
             if value == 1:
                 print("You rolled 1. Turn over.")
+                current_score = 0
                 break
             else:
                 current_score += value
                 print(f"You rolled a: {value} ")
 
             print(f"Your score is: {current_score}")
+
         player_scores[player_idx] += current_score
         print(f"Your total score is: {player_scores[player_idx]}")
+
+max_score = max(player_scores)
+winning_idx = player_scores.index(max_score)
+print(f"Player number {winning_idx + 1} is the winner with score of {max_score}")
